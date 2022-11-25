@@ -1,19 +1,13 @@
 name: Pre-Commit
-on: [pull_request, push, workflow_dispatch]
+
+on:
+  pull_request:
+  push:
 
 jobs:
-  lint:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: true
-      matrix:
-        os: ["ubuntu-latest"]
-        python-version: ["3.9"]
-
+  pre-commit:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
-        with:
-          python-version: ${{ matrix.python-version }}
-          architecture: x64
-      - uses: pre-commit/action@v3.0.0
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+    - uses: pre-commit/action@v3.0.0
